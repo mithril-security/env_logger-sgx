@@ -1,4 +1,7 @@
+#[cfg(not(target_env = "sgx"))]
 use std::{io, sync::Mutex};
+#[cfg(target_env = "sgx")]
+use std::{io, sync::SgxMutex as Mutex};
 
 use crate::fmt::{WritableTarget, WriteStyle};
 

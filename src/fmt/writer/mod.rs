@@ -3,8 +3,10 @@ mod termcolor;
 
 use self::atty::{is_stderr, is_stdout};
 use self::termcolor::BufferWriter;
+#[cfg(not(target_env = "sgx"))]
 use std::{fmt, io, mem, sync::Mutex};
-
+#[cfg(target_env = "sgx")]
+use std::{fmt, io, mem, sync::SgxMutex as Mutex};
 pub(super) mod glob {
     pub use super::termcolor::glob::*;
     pub use super::*;
